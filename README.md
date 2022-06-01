@@ -7,29 +7,19 @@
 ![image](https://user-images.githubusercontent.com/52392004/171438110-3cb4afa1-b597-4ac9-b531-78ec62b4bd7f.png)
 
 
-## CDK Initiate
+## CDK로 인프라 설치하기 
 
-Typescript로 cdk를 설정시 아래와 같이 합니다.
-
-```c
-$ cdk init app --language typescript
-
-$ cdk bootstrap aws://123456789012/ap-northeast-2
-```
-여기서 '123456789012'은 Account Number를 의미합니다.
-
-- aws-cdk-lib의 수동 Upgrade가 필요합니다.
+git repository에서 소스를 다운로드 합니다.
 
 ```c
-$ npm install -g aws-cdk-lib
+$ git clone https://github.com/kyopark2014/aws-routable-cloudfront
 ```
-
-- CloudFrontToApiGateway를 위한 aws-solutions-constructs의 aws-cloudfront-apigateway package 설치하여야 합니다.
 
 ```c
-$ npm install @aws-solutions-constructs/aws-cloudfront-apigateway
+$ cd aws-routable-cloudfront
+$ cd cdk synth
+$ cd deploy
 ```
-
 
 ## 생성된 결과
 
