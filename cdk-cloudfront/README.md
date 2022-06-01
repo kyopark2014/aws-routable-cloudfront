@@ -1,14 +1,107 @@
-# Welcome to your CDK TypeScript project
+# AWS CDK 로 인프라 생성하기 
 
-This is a blank project for CDK development with TypeScript.
+## S3 설치 
 
-The `cdk.json` file tells the CDK Toolkit how to execute your app.
+```java
+    const s3Bucket = new s3.Bucket(this, "s3-bucket-for-web-application",{
+      bucketName: "storage-web-application",
+      blockPublicAccess: s3.BlockPublicAccess.BLOCK_ALL,
+      removalPolicy: cdk.RemovalPolicy.DESTROY,
+      autoDeleteObjects: true,
+      publicReadAccess: false,
+      versioned: false,
+    });
+```    
 
-## Useful commands
+로컬 폴더에 있는 파일들을 S3에 복사하기 
 
-* `npm run build`   compile typescript to js
-* `npm run watch`   watch for changes and compile
-* `npm run test`    perform the jest unit tests
-* `cdk deploy`      deploy this stack to your default AWS account/region
-* `cdk diff`        compare deployed stack with current state
-* `cdk synth`       emits the synthesized CloudFormation template
+```java
+    new s3Deploy.BucketDeployment(this, "DeployWebApplication", {
+      sources: [s3Deploy.Source.asset("../webapplication")],
+      destinationBucket: s3Bucket,
+    });
+```    
+
+## Lambda 생성
+
+아래와 같이 Lambda를 생성합니다. 
+
+```java
+    const lambdaBasic = new lambda.Function(this, "lambdaBasic", {
+      description: 'Basic Lambda Function',
+      runtime: lambda.Runtime.NODEJS_14_X, 
+      code: lambda.Code.fromAsset("../basic-lambda-function"), 
+      handler: "index.handler", 
+      timeout: cdk.Duration.seconds(3),
+      environment: {
+      }
+    }); 
+```
+
+Lambda는 자동으로 생성된 코드를 그대로 사용합니다. 
+
+```java
+exports.handler = async (event) => {
+    // TODO implement
+    const response = {
+        statusCode: 200,
+        body: JSON.stringify('Hello from Lambda!'),
+    };
+    return response;
+};
+```
+
+## API Gateway 생성
+
+"RestApi"로 API Gateway를 생성합니다. 이때 생성한 "/status" API는 기생성한 Lambda와 연결합니다. 
+
+```java
+    const mathodName = "status"
+    const apigw = new apiGateway.RestApi(this, 'api-gateway', {
+      description: 'API Gateway',
+      endpointTypes: [apiGateway.EndpointType.REGIONAL],
+      deployOptions: {
+        stageName: 'dev',
+      },
+      defaultMethodOptions: {
+        authorizationType: apiGateway.AuthorizationType.NONE
+      },
+    }); 
+    
+    // define method of "status"
+    const api = apigw.root.addResource(mathodName);
+    api.addMethod('GET', new apiGateway.LambdaIntegration(lambdaBasic, {
+      integrationResponses: [{
+        statusCode: '200',
+      }], 
+      proxy:false, 
+    }), {
+      methodResponses: [   // API Gateway sends to the client that called a method.
+        {
+          statusCode: '200',
+          responseModels: {
+            'application/json': apiGateway.Model.EMPTY_MODEL,
+          }, 
+        }
+      ]
+    }); 
+```
+
+## CloudFront 생성
+
+아래와 같이 cloudfront를 정의합니다. 기본 Origin으로 S3 bucket을 지정하고, 추가적인 Origin으로 API Gateway를 지정합니다. 
+
+```java
+    const distribution = new cloudFront.Distribution(this, 'cloudfront', {
+      defaultBehavior: {
+        origin: new origins.S3Origin(s3Bucket),
+        allowedMethods: cloudFront.AllowedMethods.ALLOW_ALL,
+        viewerProtocolPolicy: cloudFront.ViewerProtocolPolicy.REDIRECT_TO_HTTPS,
+      },
+      priceClass: cloudFront.PriceClass.PRICE_CLASS_200,  
+    });
+    
+    distribution.addBehavior("/status", new origins.RestApiOrigin(apigw), {
+      viewerProtocolPolicy: cloudFront.ViewerProtocolPolicy.REDIRECT_TO_HTTPS,
+    });  
+```    
