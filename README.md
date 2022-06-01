@@ -42,6 +42,7 @@ $ npm install @aws-solutions-constructs/aws-cloudfront-apigateway
 
 ![noname](https://user-images.githubusercontent.com/52392004/171436966-37362137-b407-459f-a325-4edabfc2c7db.png)
 
+![image](https://user-images.githubusercontent.com/52392004/171440535-18269d39-9c50-4c66-9e90-c7ec5b17c058.png)
 
 
 
