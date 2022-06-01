@@ -13,7 +13,7 @@ export class CdkCloudfrontStack extends Stack {
   constructor(scope: Construct, id: string, props?: StackProps) {
     super(scope, id, props);
 
-// create S3
+    // create S3
     const s3Bucket = new s3.Bucket(this, "s3-bucket-for-web-application",{
       bucketName: "storage-web-application",
       blockPublicAccess: s3.BlockPublicAccess.BLOCK_ALL,
@@ -93,10 +93,12 @@ export class CdkCloudfrontStack extends Stack {
         origin: new origins.S3Origin(s3Bucket),
         allowedMethods: cloudFront.AllowedMethods.ALLOW_ALL,
         viewerProtocolPolicy: cloudFront.ViewerProtocolPolicy.REDIRECT_TO_HTTPS,
-        // description: 'cdk cloudFront'
       },
       priceClass: cloudFront.PriceClass.PRICE_CLASS_200,  
     });
+    distribution.addBehavior("/status", new origins.RestApiOrigin(apigw), {
+      viewerProtocolPolicy: cloudFront.ViewerProtocolPolicy.REDIRECT_TO_HTTPS,
+    });    
 
     new cdk.CfnOutput(this, 'distributionDomainName', {
       value: distribution.domainName,
