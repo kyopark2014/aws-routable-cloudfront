@@ -15,6 +15,8 @@ git repository에서 소스를 다운로드 합니다.
 $ git clone https://github.com/kyopark2014/aws-routable-cloudfront
 ```
 
+아래의 명령어를 이용하여 인프라를 생성합니다. 
+
 ```c
 $ cd aws-routable-cloudfront
 $ cd cdk synth
