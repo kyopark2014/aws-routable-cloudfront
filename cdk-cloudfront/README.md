@@ -2,7 +2,7 @@
 
 ## S3 설치 
 
-S3 bucket을 아래와 같이 생성합니다. 
+S3 bucket을 아래와 같이 생성합니다. 이때, 보안을 위해 외부에석 직접 접속을 제한합니다. 
 
 ```java
     const s3Bucket = new s3.Bucket(this, "s3-bucket-for-web-application",{
