@@ -2,7 +2,7 @@
 It shows a routable cloudfront 
 
 
-![image](https://user-images.githubusercontent.com/52392004/171437587-859ba324-498f-4bc9-b634-caca2c941daf.png)
+![image](https://user-images.githubusercontent.com/52392004/171438110-3cb4afa1-b597-4ac9-b531-78ec62b4bd7f.png)
 
 
 ## CDK Initiate
