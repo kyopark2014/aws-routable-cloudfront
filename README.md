@@ -21,6 +21,8 @@ $ cd cdk synth
 $ cd deploy
 ```
 
+[AWS CDK 인프라 생성하기](https://github.com/kyopark2014/aws-routable-cloudfront/tree/main/cdk-cloudfront)에 [AWS CDK](https://github.com/kyopark2014/technical-summary/blob/main/cdk-introduction.md)의 주요 동작에 대해 자세히 설명을 하고 있습니다. 
+
 ## 생성된 결과
 
 아래와 같이 CloudFront에는 2개의 origin이 등록이 되는데, 기본적으로 트래픽은 S3로 라우팅 되지만 '/status' API의 경우는 api gateway로 전달되어 처리 됩니다. 
