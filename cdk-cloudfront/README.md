@@ -15,7 +15,7 @@ S3 bucket을 아래와 같이 생성합니다. 이때, 보안을 위해 외부�
     });
 ```    
 
-로컬 폴더에 있는 파일들을 S3에 복사하기 
+로컬 폴더에 있는 파일들을 S3에 복사합니다. 
 
 ```java
     new s3Deploy.BucketDeployment(this, "DeployWebApplication", {
