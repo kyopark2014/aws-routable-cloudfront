@@ -30,6 +30,16 @@ $ npm install @aws-solutions-constructs/aws-cloudfront-apigateway
 ```
 
 
+## 생성된 결과
+
+아래와 같이 CloudFront에는 2개의 origin이 등록이 되는데, 기본적으로 트래픽은 S3로 라우팅 되지만 '/status' API의 경우는 api gateway로 전달되어 처리 됩니다. 
+
+![noname](https://user-images.githubusercontent.com/52392004/171436095-76869042-d7f3-49d9-ba37-015852ec90e5.png)
+
+
+
+
+
 ## Reference 
 
 [AWS CDK — A Beginner’s Guide with Examples](https://enlear.academy/aws-cdk-a-beginners-guide-with-examples-424c600ac409)
