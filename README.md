@@ -40,8 +40,6 @@ $ npm install @aws-solutions-constructs/aws-cloudfront-apigateway
 
 따라서 아래와 같이 브라우저에서 'status' API를 호출시 Lambda가 실행되는 것을 확인 할 수 있습니다.
 
-![noname](https://user-images.githubusercontent.com/52392004/171436966-37362137-b407-459f-a325-4edabfc2c7db.png)
-
 ![image](https://user-images.githubusercontent.com/52392004/171440535-18269d39-9c50-4c66-9e90-c7ec5b17c058.png)
 
 
