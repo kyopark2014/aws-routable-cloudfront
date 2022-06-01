@@ -21,7 +21,7 @@ $ cd cdk synth
 $ cd deploy
 ```
 
-[AWS CDK 인프라 생성하기](https://github.com/kyopark2014/aws-routable-cloudfront/tree/main/cdk-cloudfront)에 [AWS CDK](https://github.com/kyopark2014/technical-summary/blob/main/cdk-introduction.md)의 주요 동작에 대해 자세히 설명을 하고 있습니다. 
+[AWS CDK 인프라 생성하기](https://github.com/kyopark2014/aws-routable-cloudfront/tree/main/cdk-cloudfront)에서, [AWS CDK](https://github.com/kyopark2014/technical-summary/blob/main/cdk-introduction.md)를 이용해 인프라 생성하는 방법에 대해 자세히 설명하고 있습니다. 
 
 ## 생성된 결과
 
