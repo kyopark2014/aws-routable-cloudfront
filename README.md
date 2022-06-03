@@ -82,3 +82,5 @@ $ cd deploy
 [CloudFront to S3 and API Gateway](https://serverlessland.com/patterns/cloudfront-s3-lambda-cdk)
 
 [CORS란 무엇인가?](https://hannut91.github.io/blogs/infra/cors)
+
+[Cross-Origin Resource Sharing (CORS)](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS)
