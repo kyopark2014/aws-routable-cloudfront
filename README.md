@@ -7,7 +7,7 @@
 ![image](https://user-images.githubusercontent.com/52392004/171438110-3cb4afa1-b597-4ac9-b531-78ec62b4bd7f.png)
 
 
-## CORS 에러 우회
+## CORS 에러 
 
 브라우저는 HTTP 보안을 위해 리소스의 origin (domain, scheme, port)을 확인하여 원래 사이트의 origin과 다른 경우(cross-origin)에 접속을 제한합니다. 
 
@@ -17,9 +17,30 @@
 
 ![image](https://user-images.githubusercontent.com/52392004/171963632-7669ff66-74e1-45c8-8176-2b4e75746b9f.png)
 
-그런데, [Chrome과 같은 브라우저에서 request에 origin을 허용하지 않은 경우](https://stackoverflow.com/questions/11182712/refused-to-set-unsafe-header-origin-when-using-xmlhttprequest-of-google-chrome)가 있어서, API 개발 및 테스트 어려움을 격어 왔습니다.
+그런데, [Chrome과 같은 브라우저에서 request에 origin을 허용하지 않은 경우](https://stackoverflow.com/questions/11182712/refused-to-set-unsafe-header-origin-when-using-xmlhttprequest-of-google-chrome)가 있어서, API Gateway에서 CORS 설정을 하더라도, CORS 에러로 request가 실패 할 수 있습니다. 
 
-여기서는 
+따라서, 여기에서는 원천적으로 crosss-origin 이슈가 발생하지 않도록, contents(html, css, js)와 같은 리소스가 같은 origin을 사용할 수 있도록 CloudFront를 사용하는 방법을 설명합니다. 
+
+
+## CloudFront를 이용한 cross-origin 이슈 해결 방법
+
+아래와 같이 CloudFront를 이용하여 '/status'로 시작하는 모든 request는 API Gateway를 통해 제공하고, 나머지 request는 S3로 routing 되도록 할 수 있습니다.
+
+```java
+  const distribution = new cloudFront.Distribution(this, 'cloudfront', {
+      defaultBehavior: {
+        origin: new origins.S3Origin(s3Bucket),
+        allowedMethods: cloudFront.AllowedMethods.ALLOW_ALL,
+        viewerProtocolPolicy: cloudFront.ViewerProtocolPolicy.REDIRECT_TO_HTTPS,
+      },
+      priceClass: cloudFront.PriceClass.PRICE_CLASS_200,  
+    });
+    distribution.addBehavior("/status*", new origins.RestApiOrigin(apigw), {
+      cachePolicy: cloudFront.CachePolicy.CACHING_DISABLED,
+      viewerProtocolPolicy: cloudFront.ViewerProtocolPolicy.REDIRECT_TO_HTTPS,
+    });    
+```    
+
 
 ## CDK로 인프라 설치하기 
 
