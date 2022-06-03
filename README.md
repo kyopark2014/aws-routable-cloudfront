@@ -41,6 +41,10 @@
     });    
 ```    
 
+이렇게 할 경우에 아래와 같이 CloudFront에는 2개의 origin이 등록이 되는데, '/status' API의 경우는 api gateway로 전달되어 처리되고, 나머지는 S3로 라우팅 됩니다.
+
+![noname](https://user-images.githubusercontent.com/52392004/171436095-76869042-d7f3-49d9-ba37-015852ec90e5.png)
+
 
 ## CDK로 인프라 설치하기 
 
@@ -62,12 +66,7 @@ $ cd deploy
 
 ## 생성된 결과
 
-아래와 같이 CloudFront에는 2개의 origin이 등록이 되는데, 기본적으로 트래픽은 S3로 라우팅 되지만 '/status' API의 경우는 api gateway로 전달되어 처리 됩니다. 
-
-![noname](https://user-images.githubusercontent.com/52392004/171436095-76869042-d7f3-49d9-ba37-015852ec90e5.png)
-
-
-따라서 아래와 같이 브라우저에서 'status' API를 호출시 Lambda가 실행되는 것을 확인 할 수 있습니다.
+아래와 같이 브라우저에서 'status' API를 호출시 Lambda가 실행되는 것을 확인 할 수 있습니다.
 
 ![image](https://user-images.githubusercontent.com/52392004/171440535-18269d39-9c50-4c66-9e90-c7ec5b17c058.png)
 
