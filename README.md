@@ -11,13 +11,12 @@
 
 브라우저는 HTTP 보안을 위해 리소스의 origin (domain, scheme, port)을 확인하여 원래 사이트의 origin과 다른 경우(cross-origin)에 접속을 제한합니다. 
 
-![image](https://user-images.githubusercontent.com/52392004/171962747-ec673baf-744d-4a87-acc6-712dc1725be0.png)
+![image](https://user-images.githubusercontent.com/52392004/171963588-1fe1089a-e9fd-4222-b0a3-263dc2fe0d09.png)
 
 자신의 origin과 다른 리소스를 허용하려면 [Cross-Origin Resource Sharing(CORS)](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS)를 적용하여야 하는데, 브라우저는 preplight request(OPTIONS)를 보내서 서버로부터 "approval"을 받으면, actual request를 보낼 수 있습니다. 
 
-![image](https://user-images.githubusercontent.com/52392004/171962827-206bcb2f-1e0c-45f9-95a3-e092f7b4892d.png)
 
-
+![image](https://user-images.githubusercontent.com/52392004/171963632-7669ff66-74e1-45c8-8176-2b4e75746b9f.png)
 
 
 Cross-Origin Resource Sharing (CORS) is an HTTP-header based mechanism that allows a server to indicate any origins (domain, scheme, or port) other than its own from which a browser should permit loading resources. CORS also relies on a mechanism by which browsers make a "preflight" request to the server hosting the cross-origin resource, in order to check that the server will permit the actual request. In that preflight, the browser sends headers that indicate the HTTP method and headers that will be used in the actual request.
