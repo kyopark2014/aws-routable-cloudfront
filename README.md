@@ -18,10 +18,6 @@
 ![noname](https://user-images.githubusercontent.com/52392004/171965277-c06888c4-efd4-48af-b3cd-9038293922ee.png)
 
 
-
-
-![image](https://user-images.githubusercontent.com/52392004/171963632-7669ff66-74e1-45c8-8176-2b4e75746b9f.png)
-
 그런데, [Chrome과 같은 브라우저에서 request에 origin을 허용하지 않은 경우](https://stackoverflow.com/questions/11182712/refused-to-set-unsafe-header-origin-when-using-xmlhttprequest-of-google-chrome)가 있어서, API Gateway에서 CORS 설정을 하더라도, CORS 에러로 request가 실패 할 수 있습니다. 
 
 따라서, 여기에서는 원천적으로 crosss-origin 이슈가 발생하지 않도록, contents(html, css, js)와 같은 리소스가 같은 origin을 사용할 수 있도록 CloudFront를 사용하는 방법을 설명합니다. 
