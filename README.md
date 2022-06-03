@@ -7,6 +7,24 @@
 ![image](https://user-images.githubusercontent.com/52392004/171438110-3cb4afa1-b597-4ac9-b531-78ec62b4bd7f.png)
 
 
+## CORS 에러 우회
+
+브라우저는 HTTP 보안을 위해 리소스의 origin (domain, scheme, port)을 확인하여 원래 사이트의 origin과 다른 경우(cross-origin)에 접속을 제한합니다. 
+
+![image](https://user-images.githubusercontent.com/52392004/171962747-ec673baf-744d-4a87-acc6-712dc1725be0.png)
+
+자신의 origin과 다른 리소스를 허용하려면 [Cross-Origin Resource Sharing(CORS)](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS)를 적용하여야 하는데, 브라우저는 preplight request(OPTIONS)를 보내서 서버로부터 "approval"을 받으면, actual request를 보낼 수 있습니다. 
+
+![image](https://user-images.githubusercontent.com/52392004/171962827-206bcb2f-1e0c-45f9-95a3-e092f7b4892d.png)
+
+
+
+
+Cross-Origin Resource Sharing (CORS) is an HTTP-header based mechanism that allows a server to indicate any origins (domain, scheme, or port) other than its own from which a browser should permit loading resources. CORS also relies on a mechanism by which browsers make a "preflight" request to the server hosting the cross-origin resource, in order to check that the server will permit the actual request. In that preflight, the browser sends headers that indicate the HTTP method and headers that will be used in the actual request.
+
+An example of a cross-origin request: the front-end JavaScript code served from https://domain-a.com uses XMLHttpRequest to make a request for https://domain-b.com/data.json.
+
+
 ## CDK로 인프라 설치하기 
 
 git repository에서 소스를 다운로드 합니다.
@@ -45,3 +63,5 @@ $ cd deploy
 [aws-cdk-changelogs-demo](https://github.com/aws-samples/aws-cdk-changelogs-demo)
 
 [CloudFront to S3 and API Gateway](https://serverlessland.com/patterns/cloudfront-s3-lambda-cdk)
+
+[CORS란 무엇인가?](https://hannut91.github.io/blogs/infra/cors)
