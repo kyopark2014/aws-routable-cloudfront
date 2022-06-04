@@ -91,7 +91,7 @@ exports.handler = async (event) => {
 
 ## CloudFront 생성
 
-아래와 같이 cloudfront를 정의합니다. 기본 Origin으로 S3 bucket을 지정하고, 추가적인 Origin으로 API Gateway를 지정하면, '/status"를 제외한 모든 트래픽은 S3로 가도록 Routing 할 수 있습니다. 
+아래와 같이 cloudfront를 정의합니다. 기본 Origin으로 S3 bucket을 지정하고, 추가적인 Origin으로 API Gateway를 지정하면, '/status"를 제외한 모든 트래픽은 S3로 가도록 Routing 할 수 있습니다. API의 경우에 caching되면 안되므로 아래와 같이 "CACHING_DISABLED"로 policy를 지정하여야 합니다.
 
 ```java
     const distribution = new cloudFront.Distribution(this, 'cloudfront', {
@@ -104,6 +104,7 @@ exports.handler = async (event) => {
     });
     
     distribution.addBehavior("/status", new origins.RestApiOrigin(apigw), {
-      viewerProtocolPolicy: cloudFront.ViewerProtocolPolicy.REDIRECT_TO_HTTPS,
+      viewerProtocolPolicy: cloudFront.ViewerProtocolPolicy.REDIRECT_TO_HTTPS,        
+      cachePolicy: cloudFront.CachePolicy.CACHING_DISABLED,
     });  
 ```    
