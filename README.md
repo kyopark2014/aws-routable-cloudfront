@@ -1,6 +1,6 @@
 # AWS CloudFront의 URL Routing을 이용한 Web Client 및 API Server 구현
 
-여기서는 CliendFront의 URL Routing을 이용하여 Web Client와 API Server를 구현하고자 합니다. Web Client는 S3에 html과 javascript과 같은 respource들이 있으며, javascript가 실행시 호출되는 API는 Amazon API Gateway를 통해 lambda를 호출하게 됩니다. 또한, 이러한 인프라 설치(Deploy)는 [AWS CDK](https://github.com/kyopark2014/technical-summary/blob/main/cdk-introduction.md)를 이용하여, 쉽고 편리하게 구현하는것을 보여줍니다.
+여기서는 CliendFront의 URL Routing을 이용하여 Web Client와 API Server를 구현하고자 합니다. Web Client는 Amazon S3에 html과 javascript과 같은 respource로 구성되어 있으며, javascript에서 '/status'와 같은 API를 호출하면, Amazon API Gateway를 통해 lambda를 호출하는 구조를 되어 있습니다. 또한, 이러한 인프라 설치(Deploy)는 [AWS CDK](https://github.com/kyopark2014/technical-summary/blob/main/cdk-introduction.md)를 이용하여, 쉽고 편리하게 구현하는것을 보여줍니다.
 
 전체적인 Architecture는 아래와 같습니다. 사용자가 Amazon CloudFront를 이용해 web page에 접속 할 수 있습니다. 또한 restful api로 접속시에는 api의 method 이름을 이용하여 적절한 경로로 Routing 할 수 있습니다. 여기에서는 status Method를 가지고 '/status'라는 URL을 가지므로, Amazon API Gateway로 routing 되어지는데, 이때 API Gateway와 연결된 Lambda를 통해 원하는 동작을 요청 할 수 있습니다. 
 
