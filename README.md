@@ -6,6 +6,7 @@
 
 ![image](https://user-images.githubusercontent.com/52392004/171438110-3cb4afa1-b597-4ac9-b531-78ec62b4bd7f.png)
 
+<img width="664" alt="image" src="https://user-images.githubusercontent.com/52392004/171968489-bc71a7ab-ec39-431c-9942-1fb935be6530.png">
 
 ## CORS 에러 
 
