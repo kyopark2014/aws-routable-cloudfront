@@ -54,7 +54,7 @@ git repository에서 소스를 다운로드 합니다.
 $ git clone https://github.com/kyopark2014/aws-routable-cloudfront
 ```
 
-아래의 명령어를 이용하여 인프라를 생성합니다. 
+아래의 [AWS CDK](https://github.com/kyopark2014/technical-summary/blob/main/cdk-introduction.md)명령어를 이용하여 인프라를 생성합니다. 
 
 ```c
 $ cd aws-routable-cloudfront
@@ -62,7 +62,7 @@ $ cd cdk synth
 $ cd deploy
 ```
 
-[AWS CDK 인프라 생성하기](https://github.com/kyopark2014/aws-routable-cloudfront/tree/main/cdk-cloudfront)에서는 [AWS CDK](https://github.com/kyopark2014/technical-summary/blob/main/cdk-introduction.md)를 이용해 인프라를 생성하는 방법에 대해 설명하고 있습니다. 
+인프라를 생성하는 방법은 [AWS CDK 인프라 생성하기](https://github.com/kyopark2014/aws-routable-cloudfront/tree/main/cdk-cloudfront)에서 상세히 설명하고 있습니다. 
 
 ## 실행 결과
 
