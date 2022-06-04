@@ -35,7 +35,7 @@
       },
       priceClass: cloudFront.PriceClass.PRICE_CLASS_200,  
     });
-    distribution.addBehavior("/status*", new origins.RestApiOrigin(apigw), {
+    distribution.addBehavior("/status", new origins.RestApiOrigin(apigw), {
       cachePolicy: cloudFront.CachePolicy.CACHING_DISABLED,
       viewerProtocolPolicy: cloudFront.ViewerProtocolPolicy.REDIRECT_TO_HTTPS,
     });    
@@ -69,6 +69,18 @@ $ cd deploy
 아래와 같이 브라우저에서 'status' API를 호출시 Lambda가 실행되는 것을 확인 할 수 있습니다.
 
 ![image](https://user-images.githubusercontent.com/52392004/171440535-18269d39-9c50-4c66-9e90-c7ec5b17c058.png)
+
+이제 "status.html"을 호출하는데, html 내부의 request.js가 실행되면서, '/status' API를 호출하게 됩니다.
+
+- "status.html"을 로링
+
+![noname](https://user-images.githubusercontent.com/52392004/171988225-2d8618d0-2ac5-412b-9e34-5faf1bc60968.png)
+
+
+- [RUN] 버튼을 선택하여 "request.js"를 실행한 경우
+
+![noname](https://user-images.githubusercontent.com/52392004/171988212-e0647fab-900a-45b2-803b-dfcf39bceb34.png)
+
 
 
 
