@@ -62,15 +62,19 @@ $ cd cdk synth
 $ cd deploy
 ```
 
-[AWS CDK 인프라 생성하기](https://github.com/kyopark2014/aws-routable-cloudfront/tree/main/cdk-cloudfront)에서는 [AWS CDK](https://github.com/kyopark2014/technical-summary/blob/main/cdk-introduction.md)를 이용해 인프라 생성하는 방법에 대해 자세히 설명하고 있습니다. 
+[AWS CDK 인프라 생성하기](https://github.com/kyopark2014/aws-routable-cloudfront/tree/main/cdk-cloudfront)에서는 [AWS CDK](https://github.com/kyopark2014/technical-summary/blob/main/cdk-introduction.md)를 이용해 인프라를 생성하는 방법에 대해 설명하고 있습니다. 
 
-## 생성된 결과
+## 실행 결과
 
-아래와 같이 브라우저에서 'status' API를 호출시 Lambda가 실행되는 것을 확인 할 수 있습니다.
+### Postman에서 '/status' API 호출시 
+
+'/status'는 lambda-for-status로 routing되고 있으므로 아래와 같이 Lambda가 실행되는 것을 확인 할 수 있습니다.
 
 ![image](https://user-images.githubusercontent.com/52392004/171440535-18269d39-9c50-4c66-9e90-c7ec5b17c058.png)
 
-이제 "status.html"을 호출하는데, html 내부의 request.js가 실행되면서, '/status' API를 호출하게 됩니다.
+### 브라우저(Chrome)에서 "status.html"을 호출시
+
+html 내부의 request.js가 실행되면서, '/status' API를 호출하게 됩니다.
 
 - "status.html"을 로링
 
