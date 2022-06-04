@@ -76,12 +76,12 @@ $ cd deploy
 
 html 내부의 request.js가 실행되면서, '/status' API를 호출하게 됩니다.
 
-- "status.html"을 로링후 아래와 같이 [RUN]을 선택합니다. 여기서 status.html은 S3에 저장되어 있습니다. 
+- "status.html"을 로링후 아래와 같이 [RUN]을 선택합니다. 여기서 "status.html"은 S3에 저장되어 있고, CloudFront를 통해 로딩됩니다.  
 
 ![noname](https://user-images.githubusercontent.com/52392004/171988225-2d8618d0-2ac5-412b-9e34-5faf1bc60968.png)
 
 
-- [RUN] 버튼을 선택하면 "status.html"이 지정한 "request.js"를 실행되는데, "lambda-for-status"를 호출하여 아래와 같은 결과를 전달하고 있습니다. 
+- [RUN] 버튼을 선택하면 "status.html"에서 지정한 "request.js"가 실행되는데, 이때 "lambda-for-status"를 호출하여 응답을 받고, 이것을 아래와 같이 화면에 "response"로 표시하고 있습니다. 
 
 ![noname](https://user-images.githubusercontent.com/52392004/171988212-e0647fab-900a-45b2-803b-dfcf39bceb34.png)
 
