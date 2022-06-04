@@ -1,6 +1,4 @@
 const myForm = document.querySelector('#my-form');
-//const selectedSymbol = document.querySelector('#symbol');
-
 myForm.addEventListener('submit', onSubmit);
 
 function onSubmit(e) {
@@ -14,10 +12,16 @@ function onSubmit(e) {
 
   xmlHttp.onreadystatechange = function() {
     if (xmlHttp.readyState == XMLHttpRequest.DONE && xmlHttp.status == 200 ) {
-      console.log(xmlHttp.responseText);
+      console.log('response: '+xmlHttp.responseText);
+
+      let res = JSON.parse(xmlHttp.responseText);
+
+      console.log('statusCode: '+res.statusCode);
+      console.log('body: '+res.body);
+
+      document.getElementById("response").innerHTML = 'response: '+xmlHttp.responseText;	
     }
   };
   
-  xmlHttp.send(formData); 
-  console.log(xmlHttp.responseText); 
+  xmlHttp.send(null);
 }

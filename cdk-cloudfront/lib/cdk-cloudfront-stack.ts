@@ -92,11 +92,13 @@ export class CdkCloudfrontStack extends Stack {
       defaultBehavior: {
         origin: new origins.S3Origin(s3Bucket),
         allowedMethods: cloudFront.AllowedMethods.ALLOW_ALL,
+        cachePolicy: cloudFront.CachePolicy.CACHING_DISABLED,
         viewerProtocolPolicy: cloudFront.ViewerProtocolPolicy.REDIRECT_TO_HTTPS,
       },
       priceClass: cloudFront.PriceClass.PRICE_CLASS_200,  
     });
     distribution.addBehavior("/status", new origins.RestApiOrigin(apigw), {
+      cachePolicy: cloudFront.CachePolicy.CACHING_DISABLED,
       viewerProtocolPolicy: cloudFront.ViewerProtocolPolicy.REDIRECT_TO_HTTPS,
     });    
 
