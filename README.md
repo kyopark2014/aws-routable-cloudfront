@@ -64,6 +64,12 @@ $ cd deploy
 
 인프라를 생성하는 방법은 [AWS CDK 인프라 생성하기](https://github.com/kyopark2014/aws-routable-cloudfront/tree/main/cdk-cloudfront)에서 상세히 설명하고 있습니다. 
 
+인프라 삭제시는 아래 명령어를 사용합니다.
+
+```c
+$ cdk destroy
+```
+
 ## 실행 결과
 
 ### Postman에서 '/status' API 호출시 
