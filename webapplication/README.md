@@ -33,7 +33,9 @@ myForm.addEventListener('submit', onSubmit);
 function onSubmit(e) {
   e.preventDefault();
 
-  const url = '/status';
+  let deviceid = 'a1234567890';
+
+  const url = '/status?deviceid='+deviceid;
     
   var xmlHttp = new XMLHttpRequest();
 
