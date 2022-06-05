@@ -76,7 +76,9 @@ $ cdk destroy
 
 '/status'는 lambda-for-status로 routing되고 있으므로 아래와 같이 Lambda가 실행되는 것을 확인 할 수 있습니다.
 
-![image](https://user-images.githubusercontent.com/52392004/171440535-18269d39-9c50-4c66-9e90-c7ec5b17c058.png)
+![noname](https://user-images.githubusercontent.com/52392004/172040459-e9196687-cb12-416c-93e4-0339e7fd4a77.png)
+
+
 
 ### 브라우저(Chrome)에서 "status.html"을 호출시
 
@@ -84,12 +86,12 @@ html 내부의 request.js가 실행되면서, '/status' API를 호출하게 됩�
 
 - "status.html"을 로링후 아래와 같이 [RUN]을 선택합니다. 여기서 "status.html"은 S3에 저장되어 있고, CloudFront를 통해 로딩됩니다.  
 
-![noname](https://user-images.githubusercontent.com/52392004/171988225-2d8618d0-2ac5-412b-9e34-5faf1bc60968.png)
+<img width="648" alt="image" src="https://user-images.githubusercontent.com/52392004/172040341-e18e6756-2dde-4eb2-b632-35d0c062905e.png">
+
 
 
 - [RUN] 버튼을 선택하면 "status.html"에서 지정한 "request.js"가 실행되는데, 이때 "lambda-for-status"를 호출하여 응답을 받고, 이것을 아래와 같이 화면에 "response"로 표시하고 있습니다. 
 
-![noname](https://user-images.githubusercontent.com/52392004/171988212-e0647fab-900a-45b2-803b-dfcf39bceb34.png)
 
 
 
