@@ -27,18 +27,20 @@
 아래와 같이 CloudFront를 이용하여 '/status'로 시작하는 모든 request는 API Gateway를 통해 제공하고, 나머지 request는 S3로 routing 되도록 할 수 있습니다.
 
 ```java
-  const distribution = new cloudFront.Distribution(this, 'cloudfront', {
+    const distribution = new cloudFront.Distribution(this, 'cloudfront', {
       defaultBehavior: {
         origin: new origins.S3Origin(s3Bucket),
         allowedMethods: cloudFront.AllowedMethods.ALLOW_ALL,
+        cachePolicy: cloudFront.CachePolicy.CACHING_DISABLED,
         viewerProtocolPolicy: cloudFront.ViewerProtocolPolicy.REDIRECT_TO_HTTPS,
       },
       priceClass: cloudFront.PriceClass.PRICE_CLASS_200,  
     });
     distribution.addBehavior("/status", new origins.RestApiOrigin(apigw), {
       cachePolicy: cloudFront.CachePolicy.CACHING_DISABLED,
+      originRequestPolicy: myOriginRequestPolicy,
       viewerProtocolPolicy: cloudFront.ViewerProtocolPolicy.REDIRECT_TO_HTTPS,
-    });    
+    });     
 ```    
 
 이렇게 할 경우에 아래와 같이 CloudFront에는 2개의 origin이 등록이 되는데, '/status' API의 경우는 api gateway로 전달되어 처리되고, 나머지는 S3로 라우팅 됩니다.
