@@ -24,7 +24,7 @@
 
 ## CloudFront를 이용한 cross-origin 이슈 해결 방법
 
-아래와 같이 CloudFront를 이용하여 '/status'로 시작하는 모든 request는 API Gateway를 통해 제공하고, 나머지 request는 S3로 routing 되도록 할 수 있습니다.
+아래와 같이 CloudFront를 이용하여 '/status'로 시작하는 모든 request는 API Gateway를 통해 제공하고, 나머지 request는 S3로 routing 되도록 할 수 있습니다. 상세한 것은 [CDK 코드](https://github.com/kyopark2014/aws-routable-cloudfront/tree/main/cdk-cloudfront)를 참고 하시기 바랍니다.
 
 ```java
     const distribution = new cloudFront.Distribution(this, 'cloudfront', {
