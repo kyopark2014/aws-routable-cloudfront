@@ -24,7 +24,7 @@ client의 브라우저에서 web url을 이용하여 web application을 호출�
 
 ## request.js
 
-'/status' 경로로 request를 요청하므로 cross origin 이슈가 발생하지 않습니다. '/status'에 querystring '?deviceid=a1234567890'과 같이 호출하면 'lambda-for-basic'이 200OK 응답의 ㅠㅐ요 에 
+'/status' 경로로 request를 요청하므로 cross origin 이슈가 발생하지 않습니다. '/status'에 querystring '?deviceid=a1234567890'과 같이 호출하면 'lambda-for-basic'이 200OK 응답의 body에 cloudfront가 전달해준 event를 다시 전달함으로 querystring이 정상적으로 전달된것을 확인 할 수 있습니다. 
 
 ```java
 const myForm = document.querySelector('#my-form');
