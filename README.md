@@ -93,6 +93,7 @@ html 내부의 request.js가 실행되면서, '/status' API를 호출하게 됩�
 - [RUN] 버튼을 선택하면 "status.html"에서 지정한 "request.js"가 실행되는데, 이때 "lambda-for-status"를 호출하여 응답을 받고, 이것을 아래와 같이 화면에 "response"로 표시하고 있습니다. 
 
 
+<img width="652" alt="image" src="https://user-images.githubusercontent.com/52392004/172041708-71ff5590-33c4-4b9f-b8d3-a2ef0c8eee05.png">
 
 
 
