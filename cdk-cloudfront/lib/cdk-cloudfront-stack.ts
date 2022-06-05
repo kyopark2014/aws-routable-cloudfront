@@ -56,27 +56,58 @@ export class CdkCloudfrontStack extends Stack {
       description: 'The arn of basic lambda',
     });
   
+    // api-role
+    const stage = "dev";
+    const role = new iam.Role(this, "api-gateway-role", {
+      roleName: "ApiGatewayRole",
+      assumedBy: new iam.ServicePrincipal("apigateway.amazonaws.com")
+    });
+    role.addToPolicy(new iam.PolicyStatement({
+      resources: ['*'],
+      actions: ['lambda:InvokeFunction']
+    }));
+    role.addManagedPolicy({
+      managedPolicyArn: 'arn:aws:iam::aws:policy/AWSLambdaExecute',
+    }); 
+
     // define api gateway
-    const mathodName = "status"
+    const methodName = "status"
     const apigw = new apiGateway.RestApi(this, 'api-gateway', {
-      description: 'API Gateway',
+      description: 'API Gateway for cloudfront routed',
       endpointTypes: [apiGateway.EndpointType.REGIONAL],
       deployOptions: {
-        stageName: 'dev',
+        stageName: stage,
       },
       defaultMethodOptions: {
         authorizationType: apiGateway.AuthorizationType.NONE
       },
     });   
 
+    // define template
+    const templateString: string = `#set($inputRoot = $input.path('$'))
+    {
+        "deviceid": "$input.params('deviceid')"
+    }`;
+
+    const requestTemplates = { // path through
+      'application/json': templateString,
+    };
+
     // define method of "status"
-    const api = apigw.root.addResource(mathodName);
+    const api = apigw.root.addResource(methodName);
+
     api.addMethod('GET', new apiGateway.LambdaIntegration(lambdaBasic, {
+      passthroughBehavior: apiGateway.PassthroughBehavior.WHEN_NO_TEMPLATES,  // options: NEVER
+      credentialsRole: role,
+      requestTemplates: requestTemplates,
       integrationResponses: [{
         statusCode: '200',
       }], 
       proxy:false, 
     }), {
+      requestParameters: {
+        'method.request.querystring.deviceid': true,
+      },
       methodResponses: [   // API Gateway sends to the client that called a method.
         {
           statusCode: '200',
@@ -87,7 +118,20 @@ export class CdkCloudfrontStack extends Stack {
       ]
     }); 
 
+    new cdk.CfnOutput(this, 'EndpointUrl', {
+      value: apigw.url,
+      description: 'The endpoint of API Gateway',
+    });
+
     // cloudfront
+    const myOriginRequestPolicy = new cloudFront.OriginRequestPolicy(this, 'OriginRequestPolicyCloudfront', {
+      originRequestPolicyName: 'QueryStringPolicyCloudfront',
+      comment: 'Query string policy for cloudfront',
+      cookieBehavior: cloudFront.OriginRequestCookieBehavior.none(),
+      headerBehavior: cloudFront.OriginRequestHeaderBehavior.none(),
+      queryStringBehavior: cloudFront.OriginRequestQueryStringBehavior.allowList('deviceid'),
+    });
+
     const distribution = new cloudFront.Distribution(this, 'cloudfront', {
       defaultBehavior: {
         origin: new origins.S3Origin(s3Bucket),
@@ -99,6 +143,7 @@ export class CdkCloudfrontStack extends Stack {
     });
     distribution.addBehavior("/status", new origins.RestApiOrigin(apigw), {
       cachePolicy: cloudFront.CachePolicy.CACHING_DISABLED,
+      originRequestPolicy: myOriginRequestPolicy,
       viewerProtocolPolicy: cloudFront.ViewerProtocolPolicy.REDIRECT_TO_HTTPS,
     });    
 
