@@ -59,7 +59,7 @@ $ git clone https://github.com/kyopark2014/aws-routable-cloudfront
 아래의 [AWS CDK](https://github.com/kyopark2014/technical-summary/blob/main/cdk-introduction.md)명령어를 이용하여 인프라를 생성합니다. 
 
 ```c
-$ cd aws-routable-cloudfront
+$ cd cdk-cloudfront
 $ cd cdk synth
 $ cd deploy
 ```
@@ -86,7 +86,7 @@ $ cdk destroy
 
 html 내부의 request.js가 실행되면서, '/status' API를 호출하게 됩니다.
 
-- "status.html"을 로링후 아래와 같이 [RUN]을 선택합니다. 여기서 "status.html"은 S3에 저장되어 있고, CloudFront를 통해 로딩됩니다.  
+- "status.html"을 로딩 후 아래와 같이 [RUN]을 선택합니다. 여기서 "status.html"은 S3에 저장되어 있고, CloudFront를 통해 로딩됩니다.  
 
 <img width="648" alt="image" src="https://user-images.githubusercontent.com/52392004/172040341-e18e6756-2dde-4eb2-b632-35d0c062905e.png">
 
